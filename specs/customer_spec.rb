@@ -1,11 +1,13 @@
 require("minitest/autorun")
 require_relative("../customer.rb")
+require_relative("../room.rb")
 
 class TestCustomer < MiniTest::Test
 
   def setup
     @customer1 = Customer.new("James", 50, "Coast Line")
     @customer2 = Customer.new("Jess", 100, "Total Eclipse of the Heart")
+    @room1 = Room.new(@capacity,150, 50, @track_list, 5)
   end
 
   def test_customer_attributes
@@ -15,8 +17,8 @@ class TestCustomer < MiniTest::Test
   end
 
   def test_remove_money_from_wallet
-    @customer1.remove_money_from_wallet(30)
-    assert_equal(20, @customer1.wallet_ammount)
+    @customer2.remove_money_from_wallet(@room1)
+    assert_equal(50, @customer2.wallet_ammount)
   end
 
 end
