@@ -17,7 +17,7 @@ class TestCustomer < MiniTest::Test
   end
 
   def test_remove_money_from_wallet
-    @customer2.remove_money_from_wallet(@room1)
+    @customer2.remove_money_from_wallet(50)
     assert_equal(50, @customer2.wallet_ammount)
   end
 
