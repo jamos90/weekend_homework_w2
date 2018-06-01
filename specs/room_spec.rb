@@ -13,4 +13,10 @@ class TestRoom < MiniTest::Test
     @room1 = Room.new(12, 150, 50, track_list)
   end
 
+  def test_room_attribures
+    assert_equal(12, @room1.capacity)
+    assert_equal(150, @room1.till_ammount)
+    assert_equal(50, @room1.room_cost)
+  end
+
 end
