@@ -41,4 +41,9 @@ class TestRoom < MiniTest::Test
     assert_equal(3, @room1.customer_count)
   end
 
+  def test_remove_customers_from_room
+    @room1.remove_customers_from_room(@customer3)
+    assert_equal(2,@room1.customer_count)
+  end
+
 end

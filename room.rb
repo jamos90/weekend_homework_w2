@@ -24,8 +24,12 @@ class Room
  end
 
  def add_customer_to_room(customer)
-   return if @capacity.count >= @max_occupancy
-  return @cpacity.push(customer)
+   # return if @capacity.count >= @max_occupancy
+  return @capacity.push(customer)
+ end
+
+ def remove_customers_from_room(customer)
+   return @capacity.delete(customer)
  end
 
 
