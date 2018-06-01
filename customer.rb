@@ -8,7 +8,13 @@ class Customer
     @favourite_song = favourite_song
   end
 
-   def remove_money_from_wallet
+   def remove_money_from_wallet(room_cost)
+     return if @wallet_ammount < room_cost
+     return @wallet_ammount -= room_cost
    end
+
+
+
+
 
 end

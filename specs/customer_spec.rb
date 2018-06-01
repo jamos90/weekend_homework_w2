@@ -14,4 +14,9 @@ class TestCustomer < MiniTest::Test
     assert_equal("Total Eclipse of the Heart", @customer2.favourite_song)
   end
 
+  def test_remove_money_from_wallet
+    @customer1.remove_money_from_wallet(30)
+    assert_equal(20, @customer1.wallet_ammount)
+  end
+
 end
