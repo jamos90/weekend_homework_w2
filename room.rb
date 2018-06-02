@@ -39,4 +39,10 @@ class Room
    @till_ammount += @room_cost
  end
 
+ def play_songs
+   @track_list.each {|song| p song}
+ end
+
+
+
 end

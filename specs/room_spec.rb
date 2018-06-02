@@ -58,5 +58,11 @@ class TestRoom < MiniTest::Test
     assert_equal(200, @room1.till_ammount)
   end
 
+  def test_room_can_play_songs
+    p @track_list
+    song_list = ["Cost Line", "Total Ecplipse of the Heat"]
+    assert_equal(song_list, @room1.play_songs)
+  end
+
 
 end

@@ -13,6 +13,13 @@ class Customer
      @wallet_ammount -= amount
    end
 
+   def favourite_song_plays(song)
+    return "Whooo!" if song == @favourite_song
+  else
+    return "This song is ok..."
+  end
+
+
 
 
 
