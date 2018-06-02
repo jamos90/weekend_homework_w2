@@ -6,7 +6,7 @@ require_relative("../customer.rb")
 class TestRoom < MiniTest::Test
 
   def setup
-   @song1 = Song.new("Cost Line")
+   @song1 = Song.new("Coast Line")
    @song2 = Song.new("Total Ecplipse of the Heat")
    @song3 = Song.new("Sweet Child of Mine")
    @track_list = [@song1, @song2]
@@ -58,11 +58,22 @@ class TestRoom < MiniTest::Test
     assert_equal(200, @room1.till_ammount)
   end
 
-  def test_room_can_play_songs
-    p @track_list
-    song_list = ["Cost Line", "Total Ecplipse of the Heat"]
-    assert_equal(song_list, @room1.play_songs)
+  def test_room_has_song
+    assert_equal(true, @room1.room_has_song(@song1))
+    assert_equal(false, @room1.room_has_song(@song3))
   end
+
+  def test_room_plays_song
+    assert_equal("The next song is Coast Line", @room1.room_plays_song(@song1))
+    assert_equal("We don't have that song",@room1.room_plays_song(@song3))
+  end
+
+  def test_customer_favourite_song_play_in_room
+   assert_equal("Whoo!", @room1.customers_favourite_song_plays(@customer1,@song1))
+  end
+
+
+
 
 
 end

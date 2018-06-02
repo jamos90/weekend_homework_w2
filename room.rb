@@ -39,9 +39,27 @@ class Room
    @till_ammount += @room_cost
  end
 
- def play_songs
-   @track_list.each {|song| p song}
+ def play_songs(song)
+   @track_list.each {|song| p song.title}
  end
+
+ def room_has_song(song)
+    @track_list.include?(song)
+    # return "The next song is #{song}"
+  end
+
+  def room_plays_song(song)
+    return "The next song is #{song.title}" if room_has_song(song) == true
+    else "We don't have that song"
+
+  end
+
+  def customers_favourite_song_plays(customer, song)
+   return customer.favourite_song_plays(song) if song == customer.favourite_song
+ else
+   return "This is not my favourite song"
+
+  end
 
 
 

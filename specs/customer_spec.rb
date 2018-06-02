@@ -34,4 +34,6 @@ class TestCustomer < MiniTest::Test
     assert_equal("This song is ok...", @customer1.favourite_song_plays("Total Eclipse of the Heart"))
   end
 
+
+
 end
