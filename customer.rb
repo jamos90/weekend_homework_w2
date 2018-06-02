@@ -1,11 +1,14 @@
 class Customer
 
-  attr_reader :name, :wallet_ammount, :favourite_song
+  attr_reader :name, :wallet_ammount, :favourite_song, :drunkenness
 
-  def initialize(name, wallet_ammount, favourite_song)
+  attr_writer :drunkenness
+
+  def initialize(name, wallet_ammount, favourite_song, drunkenness)
     @name = name
     @wallet_ammount = wallet_ammount
     @favourite_song = favourite_song
+    @drunkenness = drunkenness
   end
 
    def remove_money_from_wallet(amount)
@@ -19,7 +22,17 @@ class Customer
     return "This song is ok..."
   end
 
+  def too_drink_to_sing?
+    true if @drunkenness >= 70
+    return "Urggh ahh ahfdf"
+      else
+      return "They are sining like an angel"
+  end
 
+  def customer_buys_drink(drink)
+    @wallet_amount -= drink.price
+    @drunkenness += drink.alcohol_level
+  end
 
 
 

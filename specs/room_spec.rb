@@ -12,19 +12,19 @@ class TestRoom < MiniTest::Test
    @song2 = Song.new("Total Ecplipse of the Heat")
    @song3 = Song.new("Sweet Child of Mine")
    @track_list = [@song1, @song2]
-   @customer1 = Customer.new("James", 50, "Coast Line")
-   @customer2 = Customer.new("Jess", 100, "Total Eclipse of the Heart")
-   @customer3 = Customer.new("Kate", 200, "Sweet Child Of Mine")
+   @customer1 = Customer.new("James", 50, "Coast Line", 70)
+   @customer2 = Customer.new("Jess", 100, "Total Eclipse of the Heart", 40)
+   @customer3 = Customer.new("Kate", 200, "Sweet Child Of Mine", 80)
    @guests = [@customer1, @customer2]
+   @drink1 = Drink.new("beer",5, 3)
+   @drink2 = Drink.new("wine", 6, 20)
+   @drink3 = Drink.new("cider", 4, 4)
+   @drink4 = Drink.new("juice", 3, 0)
+   @drinks_list = [@drink1, @drink2, @drink3]
+   @bar = Bar.new(@drinks_list, 200)
+   @room1 = Room.new(@guests,150, 50, @track_list, 5, @bar)
+   @room2 = Room.new(@guests, 200, 40, @track_list,2,@bar)
 
-    @room1 = Room.new(@guests,150, 50, @track_list, 5,@bar)
-    @room2 = Room.new(@guests, 200, 40, @track_list,2,@bar)
-    @drink1 = Drink.new("beer",5)
-    @drink2 = Drink.new("wine", 6)
-    @drink3 = Drink.new("cider", 4)
-    @drink4 = Drink.new("juice", 3)
-    @drinks_list = [@drink1, @drink2, @drink3]
-    @bar = Bar.new(@drinks_list, 200)
   end
 
   def test_room_attribures
@@ -93,6 +93,13 @@ class TestRoom < MiniTest::Test
     assert_equal(45, @customer1.wallet_ammount)
     assert_equal(205, @bar.bar_ballance)
     assert_equal(2, @bar.drinks_list.length())
+    assert_equal(73, @customer1.drunkenness)
   end
+
+  def test_room_refuses_entry__1
+    @room1.check_out_if_too_drunk(@customer1)
+    assert_equal(1, @room1.customer_count)
+  end
+
 
 end

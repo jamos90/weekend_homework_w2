@@ -1,19 +1,22 @@
 require("minitest/autorun")
 require_relative("../customer.rb")
 require_relative("../room.rb")
+require_relative("../drink.rb")
+
 
 class TestCustomer < MiniTest::Test
 
   def setup
-    @customer1 = Customer.new("James", 50, "Coast Line")
-    @customer2 = Customer.new("Jess", 100, "Total Eclipse of the Heart")
-    @room1 = Room.new(@capacity,150, 50, @track_list, 5)
+    @customer1 = Customer.new("James", 50, "Coast Line", 70)
+    @customer2 = Customer.new("Jess", 100, "Total Eclipse of the Heart", 0)
+
   end
 
   def test_customer_attributes
     assert_equal("Jess", @customer2.name)
     assert_equal(100, @customer2.wallet_ammount)
     assert_equal("Total Eclipse of the Heart", @customer2.favourite_song)
+    assert_equal(70, @customer1.drunkenness)
   end
 
   def test_remove_money_from_wallet__take_money
@@ -34,6 +37,8 @@ class TestCustomer < MiniTest::Test
     assert_equal("This song is ok...", @customer1.favourite_song_plays("Total Eclipse of the Heart"))
   end
 
-
+  def test_customer_cannot_sing_if_too_drink
+    assert_equal("Urggh ahh ahfdf", @customer1.too_drink_to_sing?)
+  end
 
 end

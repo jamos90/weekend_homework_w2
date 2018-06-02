@@ -51,21 +51,28 @@ class Room
 
   def room_plays_song(song)
     return "The next song is #{song.title}" if room_has_song(song) == true
-    else "We don't have that song"
+    return "We don't have that song"
 
   end
 
   def customers_favourite_song_plays(customer, song)
    return customer.favourite_song_plays(song) if song == customer.favourite_song
- else
+
    return "This song is ok..."
 
   end
 
   def customer_buys_drink(customer,drink,bar)
     customer.remove_money_from_wallet(drink.price)
+    customer.drunkenness += drink.alcohol_level
     bar.bar_ballance += drink.price
     bar.drinks_list.delete(drink)
+  end
+
+  def check_out_if_too_drunk(customer)
+    if customer.too_drink_to_sing?
+      remove_customers_from_room(customer)
+    end
   end
 
 
