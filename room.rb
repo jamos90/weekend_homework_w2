@@ -2,15 +2,17 @@ require_relative("customer.rb")
 
 class Room
 
-   attr_reader :guests, :till_ammount, :room_cost
+   attr_reader :guests, :till_ammount, :room_cost, :drinks_list, :bar
 
-  def initialize(guests, till_ammount, room_cost, track_list, max_occupancy)
+  def initialize(guests, till_ammount, room_cost, track_list, max_occupancy, bar)
 
    @guests = guests
    @till_ammount = till_ammount
    @room_cost = room_cost
    @track_list = track_list
    @max_occupancy = max_occupancy
+   @bar = bar
+
  end
 
  def track_list_length
@@ -45,7 +47,6 @@ class Room
 
  def room_has_song(song)
     @track_list.include?(song)
-    # return "The next song is #{song}"
   end
 
   def room_plays_song(song)
@@ -57,8 +58,14 @@ class Room
   def customers_favourite_song_plays(customer, song)
    return customer.favourite_song_plays(song) if song == customer.favourite_song
  else
-   return "This is not my favourite song"
+   return "This song is ok..."
 
+  end
+
+  def customer_buys_drink(customer,drink,bar)
+    customer.remove_money_from_wallet(drink.price)
+    bar.bar_ballance += drink.price
+    bar.drinks_list.delete(drink)
   end
 
 

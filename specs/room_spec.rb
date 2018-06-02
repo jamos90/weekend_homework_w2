@@ -2,6 +2,8 @@ require("minitest/autorun")
 require_relative("../room.rb")
 require_relative("../song.rb")
 require_relative("../customer.rb")
+require_relative("../bar.rb")
+require_relative("../drink.rb")
 
 class TestRoom < MiniTest::Test
 
@@ -15,8 +17,14 @@ class TestRoom < MiniTest::Test
    @customer3 = Customer.new("Kate", 200, "Sweet Child Of Mine")
    @guests = [@customer1, @customer2]
 
-    @room1 = Room.new(@guests,150, 50, @track_list, 5)
-    @room2 = Room.new(@guests, 200, 40, @track_list,2)
+    @room1 = Room.new(@guests,150, 50, @track_list, 5,@bar)
+    @room2 = Room.new(@guests, 200, 40, @track_list,2,@bar)
+    @drink1 = Drink.new("beer",5)
+    @drink2 = Drink.new("wine", 6)
+    @drink3 = Drink.new("cider", 4)
+    @drink4 = Drink.new("juice", 3)
+    @drinks_list = [@drink1, @drink2, @drink3]
+    @bar = Bar.new(@drinks_list, 200)
   end
 
   def test_room_attribures
@@ -68,12 +76,23 @@ class TestRoom < MiniTest::Test
     assert_equal("We don't have that song",@room1.room_plays_song(@song3))
   end
 
-  def test_customer_favourite_song_play_in_room
-   assert_equal("Whoo!", @room1.customers_favourite_song_plays(@customer1,@song1))
+  def test_customer_favourite_song_play_in_room__favourite
+   assert_equal("Whooo!", @room1.customers_favourite_song_plays(@customer1,"Coast Line"))
   end
 
+  def test_customer_favourite_song_play_in_room__non_favourite
+   assert_equal("This song is ok...", @room1.customers_favourite_song_plays(@customer2,"Coast Line"))
+  end
 
+  def test_room_has_bar_with_ballance
+    assert_equal(200,@bar.bar_ballance)
+  end
 
-
+  def test_customer_buys_drink
+    @room1.customer_buys_drink(@customer1,@drink1,@bar)
+    assert_equal(45, @customer1.wallet_ammount)
+    assert_equal(205, @bar.bar_ballance)
+    assert_equal(2, @bar.drinks_list.length())
+  end
 
 end
